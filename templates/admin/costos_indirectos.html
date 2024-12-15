@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Costos Indirectos</title>
+    <style>
+        /* Estilo general */
+        body {
+            background-color: #ffe6f0; /* Rosa pastel claro */
+            font-family: 'Arial', sans-serif;
+            color: #333;
+            padding: 20px;
+            margin: 0;
+        }
+
+        /* Título */
+        h1 {
+            text-align: center;
+            color: #ff66b2; /* Rosa fuerte pero suave */
+            font-size: 2.5em;
+            margin-bottom: 30px;
+        }
+
+        h2 {
+            color: #ff66b2;
+            text-align: center;
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+
+        /* Estilo del formulario */
+        form {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Estilo de las etiquetas y los inputs */
+        label {
+            font-size: 1.1em;
+            color: #ff66b2;
+            margin-bottom: 5px;
+            display: inline-block;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ff66b2;
+            border-radius: 5px;
+            font-size: 1em;
+        }
+
+        /* Botón para agregar costo indirecto */
+        button {
+            background-color: #ff80bf; /* Rosa suave */
+            color: white;
+            font-size: 1.1em;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        /* Efecto hover del botón */
+        button:hover {
+            background-color: #ff66b2; /* Rosa más fuerte al pasar el cursor */
+            transform: scale(1.05);
+        }
+
+        /* Estilo de la tabla */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 30px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: center;
+            border: 1px solid #ff66b2;
+        }
+
+        th {
+            background-color: #ff80bf; /* Rosa suave */
+            color: white;
+        }
+
+        td {
+            background-color: #f9f9f9;
+        }
+
+        tr:nth-child(even) td {
+            background-color: #f2f2f2;
+        }
+
+        tr:hover {
+            background-color: #ffebf2; /* Color suave al pasar el mouse */
+        }
+    </style>
+</head>
+<body>
+    <h1>Gestión de Costos Indirectos</h1>
+    <form method="POST">
+        <label>Nombre:</label>
+        <input type="text" name="nombre" required><br>
+        <label>Valor:</label>
+        <input type="number" name="valor" step="0.01" required><br>
+        <button type="submit">Agregar Costo Indirecto</button>
+    </form>
+
+    <h2>Lista de Costos Indirectos</h2>
+    <table>
+        <tr>
+            {% for col in columnas %}
+            <th>{{ col }}</th>
+            {% endfor %}
+        </tr>
+        {% for costo in data %}
+        <tr>
+            {% for value in costo %}
+            <td>{{ value }}</td>
+            {% endfor %}
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

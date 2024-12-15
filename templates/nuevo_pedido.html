@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrar Nuevo Pedido</title>
+    <style>
+        /* Estilo general */
+        body {
+            background-color: #ffe6f0; /* Rosa pastel claro */
+            font-family: 'Arial', sans-serif;
+            color: #333;
+            padding: 20px;
+            margin: 0;
+        }
+
+        /* Título */
+        h1 {
+            text-align: center;
+            color: #ff66b2; /* Rosa fuerte pero suave */
+            font-size: 2.5em;
+            margin-bottom: 30px;
+        }
+
+        /* Estilo del formulario */
+        form {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Estilo de las etiquetas */
+        label {
+            font-size: 1.1em;
+            color: #ff66b2;
+            margin-bottom: 5px;
+            display: inline-block;
+        }
+
+        /* Estilo de los campos de entrada */
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ff66b2;
+            border-radius: 5px;
+            font-size: 1em;
+        }
+
+        /* Botones */
+        button {
+            background-color: #ff80bf; /* Rosa suave */
+            color: white;
+            font-size: 1.1em;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        /* Efecto hover de los botones */
+        button:hover {
+            background-color: #ff66b2; /* Rosa más fuerte */
+            transform: scale(1.05);
+        }
+
+        /* Estilo de la lista de resultados */
+        h2 {
+            color: #ff66b2;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            margin: 10px 0;
+            font-size: 1.1em;
+        }
+
+        /* Botones adicionales */
+        button + button {
+            margin-top: 20px;
+        }
+
+        /* Centrar los botones de navegación */
+        .nav-buttons {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Registrar Nuevo Pedido</h1>
+    <form method="POST" id="pedidoForm">
+        <!-- Cliente -->
+        <label for="cliente">Cliente:</label>
+        <input type="text" id="cliente" name="cliente" value="{{ request.form.get('cliente', '') }}" required>
+        <br>
+
+        <!-- Cantidad -->
+        <label for="cantidad">Cantidad:</label>
+        <input type="number" id="cantidad" name="cantidad" value="{{ request.form.get('cantidad', '') }}" required>
+        <br>
+
+        <!-- Modelo -->
+        <label for="modelo">Modelo:</label>
+        <select id="modelo" name="modelo" required>
+            {% for producto in productos %}
+            <option value="{{ producto }}" {% if producto == request.form.get('modelo') %}selected{% endif %}>
+                {{ producto }}
+            </option>
+            {% endfor %}
+        </select>
+        <br>
+
+        <!-- Fecha de Entrega -->
+        <label for="fecha_entrega">Fecha de Entrega:</label>
+        <input type="date" id="fecha_entrega" name="fecha_entrega" value="{{ request.form.get('fecha_entrega', '') }}" required>
+        <br>
+
+        <!-- Botones -->
+        <button type="submit" name="accion" value="calcular">Calcular Costos</button>
+        <button type="submit" name="accion" value="registrar">Registrar Pedido</button>
+        <button type="button" onclick="limpiarCampos()">Limpiar</button>
+    </form>
+
+    <!-- Mostrar los resultados del cálculo -->
+    {% if resultados %}
+    <h2>Resultados del Cálculo</h2>
+    <p><strong>Costo Total:</strong> ${{ resultados['costo_total'] }}</p>
+    <p><strong>Precio Unitario:</strong> ${{ resultados['precio_unitario'] }}</p>
+    <h3>Detalle de Costos</h3>
+    <ul>
+        <li><strong>Materia Prima:</strong> ${{ resultados['detalle']['materia_prima'] }}</li>
+        <li><strong>Mano de Obra:</strong> ${{ resultados['detalle']['mano_obra'] }}</li>
+        <li><strong>Costos Indirectos:</strong> ${{ resultados['detalle']['costos_indirectos'] }}</li>
+    </ul>
+    {% endif %}
+
+    <div class="nav-buttons">
+        <button onclick="window.location.href='/pedidos'">Ir a Pedidos</button>
+        <button onclick="window.location.href='/'">Volver al Inicio</button>
+    </div>
+
+    <!-- Script para limpiar campos -->
+    <script>
+        function limpiarCampos() {
+            document.getElementById("cliente").value = "";
+            document.getElementById("cantidad").value = "";
+            document.getElementById("modelo").selectedIndex = 0;
+            document.getElementById("fecha_entrega").value = "";
+        }
+    </script>
+</body>
+</html>

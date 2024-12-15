@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Materias Primas</title>
+    <style>
+        /* Estilo general */
+        body {
+            background-color: #fce4ec; /* Rosa pastel claro */
+            font-family: 'Arial', sans-serif;
+            color: #4a148c; /* Rosa oscuro para el texto */
+            padding: 20px;
+            margin: 0;
+        }
+
+        /* Título */
+        h1 {
+            text-align: center;
+            color: #d81b60; /* Rosa fuerte */
+            font-size: 2.5em;
+            margin-bottom: 30px;
+        }
+
+        h2 {
+            color: #d81b60;
+            text-align: center;
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+
+        /* Estilo del formulario */
+        form {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Estilo de las etiquetas y los inputs */
+        label {
+            font-size: 1.2em;
+            color: #d81b60;
+            margin-bottom: 5px;
+            display: inline-block;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #f06292; /* Rosa más suave para los bordes */
+            border-radius: 5px;
+            font-size: 1em;
+        }
+
+        /* Botón para agregar materia prima */
+        button {
+            background-color: #f06292; /* Rosa suave */
+            color: white;
+            font-size: 1.1em;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        /* Efecto hover del botón */
+        button:hover {
+            background-color: #d81b60; /* Rosa más fuerte */
+            transform: scale(1.05);
+        }
+
+        /* Estilo de la tabla */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 30px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: center;
+            border: 1px solid #f06292; /* Rosa suave */
+        }
+
+        th {
+            background-color: #f8bbd0; /* Rosa claro para la cabecera */
+            color: white;
+        }
+
+        td {
+            background-color: #fce4ec; /* Rosa pastel para las celdas */
+        }
+
+        tr:nth-child(even) td {
+            background-color: #f8bbd0; /* Alterna con rosa más claro */
+        }
+
+        tr:hover {
+            background-color: #f8bbd0; /* Color suave al pasar el mouse */
+        }
+    </style>
+</head>
+<body>
+    <h1>Gestión de Materias Primas</h1>
+    <form method="POST">
+        <label>Nombre:</label>
+        <input type="text" name="nombre" required><br>
+        <label>Precio Unitario:</label>
+        <input type="number" name="precio_unitario" step="0.01" required><br>
+        <label>Cantidad Disponible:</label>
+        <input type="number" name="cantidad_disponible" step="0.01" required><br>
+        <button type="submit">Agregar Materia Prima</button>
+    </form>
+
+    <h2>Lista de Materias Primas</h2>
+    <table>
+        <tr>
+            {% for col in columnas %}
+            <th>{{ col }}</th>
+            {% endfor %}
+        </tr>
+        {% for materia in data %}
+        <tr>
+            {% for value in materia %}
+            <td>{{ value }}</td>
+            {% endfor %}
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

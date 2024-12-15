@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aplicativo de Costos</title>
+    <style>
+        /* Fondo y fuente general */
+        body {
+            background-color: #ffe6f0; /* Rosa pastel claro */
+            font-family: 'Arial', sans-serif;
+            color: #333;
+        }
+
+        /* Título */
+        h1 {
+            text-align: center;
+            color: #ff66b2; /* Rosa fuerte pero suave */
+            font-size: 2.5em;
+            margin-top: 50px;
+        }
+
+        /* Botones */
+        button {
+            background-color: #ff80bf; /* Rosa suave */
+            color: white;
+            font-size: 1.1em;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            margin: 10px;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        /* Efecto cuando el cursor pasa sobre los botones */
+        button:hover {
+            background-color: #ff66b2; /* Rosa más fuerte al pasar el ratón */
+            transform: scale(1.05);
+        }
+
+        /* Diseño de los botones de la página */
+        button:focus {
+            outline: none;
+        }
+
+        /* Botones en línea */
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+            margin: 0;
+        }
+
+        /* Separación entre botones */
+        button + button {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Administración</h1>
+    <button onclick="window.location.href='/admin/productos'">Gestión de Productos</button>
+    <button onclick="window.location.href='/admin/materias_primas'">Gestión de Materias Primas</button>
+    <button onclick="window.location.href='/admin/mano_obra'">Gestión de Mano de Obra</button>
+    <button onclick="window.location.href='/admin/costos_indirectos'">Gestión de Costos Indirectos</button>
+    <h1>Bienvenido al Sistema de Costos</h1>
+    <button onclick="window.location.href='/nuevo_pedido'">Registrar Nuevo Pedido</button>
+    <button onclick="window.location.href='/pedidos'">Ver Pedidos</button>
+    
+</body>
+</html>
